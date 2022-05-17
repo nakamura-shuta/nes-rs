@@ -37,13 +37,13 @@ impl Rom {
         let rom_buffer = load_file(path);
 
         //read Header
-        let nes_header = Header::new(&rom_buffer.to_vec()).unwrap();
+        let nes_header = Header::new(&rom_buffer.to_vec())?;
         println!("{:?}", nes_header);
 
         //read program data
-        let program_data = load_program(&rom_buffer, &nes_header).unwrap();
+        let program_data = load_program(&rom_buffer, &nes_header)?;
         //read charctor data
-        let char_data = load_char(&rom_buffer, &nes_header).unwrap();
+        let char_data = load_char(&rom_buffer, &nes_header)?;
 
         //mapper
         let mapper = (rom_buffer[7] & 0b1111_0000) | (rom_buffer[6] >> 4);
